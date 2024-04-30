@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "app"
+version = "0.1.0"
+description = ""
+authors = ["Bruno Gomes QA <bruno.gomes.qa@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+flask = "^3.0.3"
+blue = "^0.9.1"
+flask-pydantic-spec = "^0.6.0"
+sqlacodegen = "^2.3.0.post1"
+taskipy = "^1.12.2"
+
+
+[tool.poetry.group.dev.dependencies]
+httpie = "^3.2.2"
+
+[tool.taskipy.tasks]
+pre_init = "poetry shell"
+init = "flask run"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
