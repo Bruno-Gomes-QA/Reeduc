@@ -1,7 +1,7 @@
-# Supermercado API
+# Reciclagem API
 
 ## Introdução
-Está é uma aplicação desenvolvida em Python usando Flask para criar uma API RESTful. Até o momento fornece endpoints para realizar operações relacionadas a produtos em um sistema de supermercado.
+Está é uma aplicação desenvolvida em Python usando Flask para criar uma API RESTful. Até o momento fornece endpoints para realizar operações relacionadas a produtos em um sistema de Reciclagem.
 
 ## Requisitos
 - Python 3.10
