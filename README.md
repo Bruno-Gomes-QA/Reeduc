@@ -23,7 +23,6 @@ cd Challenge/api
 3. Instale as dependências em um ambiente virtual do projeto usando Poetry (Permissão de Administrador Necessária):
 
 ```python
-poetry shell
 poetry install
 ```
 
