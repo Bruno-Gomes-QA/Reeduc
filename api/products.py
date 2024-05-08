@@ -3,17 +3,30 @@ from flask_pydantic_spec import Response, Request
 from sqlalchemy.exc import SQLAlchemyError
 from app import spec, db
 from models import Product, Department
-from schemas import ProductModel
+from schemas import ProductModel, ProductGet
 
 products = Blueprint('products', __name__)
 
 @products.route('/products', methods=['GET'])
+@spec.validate(body=Request(ProductGet), resp=Response(HTTP_201=ProductGet))
 def get_products():
     #GET All Products
     try:
-        products = db.session.query(Product).all()
+        query = db.session.query(Product)
+        department_id = request.args.get('department_id')
+        created_after = request.args.get('created_after')
+        name = request.args.get('name')
+
+        if department_id:
+            query = query.filter(Product.department_id == department_id)
+        if created_after:
+            query = query.filter(Product.created_at >= created_after)
+        if name:
+            query = query.filter(Product.product_name.contains(name))
+
+        products = query.all()
         s_products = [product.serialize() for product in products]
-        return jsonify({'message': 'All Found Products', 'data': s_products}), 200
+        return jsonify({'message': 'Filtered Products', 'data': s_products}), 200
     except SQLAlchemyError as e:
         current_app.logger.error(f'Failed to fetch products: {e}')
         return jsonify({'error': 'Database error'}), 500

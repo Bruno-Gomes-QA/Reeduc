@@ -6,7 +6,7 @@ from db import Database
 db = Database('mysql+pymysql://root:toor@localhost:3306/base')
 
 app = Flask(__name__)
-spec = FlaskPydanticSpec('flask', title='SuperMarket')
+spec = FlaskPydanticSpec('flask', title='Reciclagem API')
 spec.register(app)
 from products import products
 
