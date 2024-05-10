@@ -37,12 +37,10 @@ class ProductModel(BaseModel):
 class ProductGet(BaseModel):
     product_name: Optional[str] = Field(None, description="The name of the product")
     product_description: Optional[str] = Field(None, description="The description of the product")
-    buy_price: Optional[float] = Field(None, description="The buying price of the product")
-    sale_price: Optional[float] = Field(None, description="The selling price of the product")
-    stock: Optional[float] = Field(None, description="The stock quantity of the product")
-    department_id: Optional[int] = Field(None, description="The ID of the department associated with the product")
-    created_at: Optional[int] = Field(None, description="The creation time of the product")
-    updated_at: Optional[int] = Field(None, description="The last update time of the product")
+    department_id: Optional[int] = Field(None, description="The ID of the department associated with the products")
+    buy_price: Optional[float] = Field(None, description="The buying price of the product, if negative use <= else >=")
+    sale_price: Optional[float] = Field(None, description="The selling price of the product, if negative use <= else >=")
+    stock: Optional[float] = Field(None, description="The stock quantity of the product, if negative use <= else >=")
 
 class PeopleModel(BaseModel):
     name: str = Field(..., description="The name of the person")

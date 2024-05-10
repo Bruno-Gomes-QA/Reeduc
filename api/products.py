@@ -13,16 +13,32 @@ def get_products():
     #GET All Products
     try:
         query = db.session.query(Product)
+
+        product_name = request.args.get('product_name')
+        product_description = request.args.get('product_description')
         department_id = request.args.get('department_id')
-        created_after = request.args.get('created_after')
-        name = request.args.get('name')
+        buy_price = request.args.get('buy_price')
+        sale_price = request.args.get('sale_price')
+        stock = request.args.get('stock')
 
         if department_id:
             query = query.filter(Product.department_id == department_id)
-        if created_after:
-            query = query.filter(Product.created_at >= created_after)
-        if name:
-            query = query.filter(Product.product_name.contains(name))
+        if sale_price and sale_price >= 0:
+            query = query.filter(Product.sale_price >= sale_price)
+        elif sale_price and sale_price < 0:
+            query = query.filter(Product.sale_price <= abs(sale_price))
+        if buy_price and buy_price >= 0:
+            query = query.filter(Product.buy_price >= buy_price)
+        elif buy_price and buy_price < 0:
+            query = query.filter(Product.buy_price <= abs(sale_price))
+        if product_name:
+            query = query.filter(Product.product_name.contains(product_name))
+        if product_description:
+            query = query.filter(Product.product_description.contains(product_description))
+        if stock and stock >= 0:
+            query = query.filter(Product.stock >= stock)
+        elif stock and stock < 0:
+            query = query.filter(Product.stock <= abs(stock))
 
         products = query.all()
         s_products = [product.serialize() for product in products]
