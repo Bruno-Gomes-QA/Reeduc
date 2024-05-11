@@ -139,7 +139,7 @@ class People(Base):
     created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
     updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
     status = Column(Integer)
-    people_type_id = Column(ForeignKey('people_types.id', ondelete='CASCADE'))
+    people_type_id = Column(ForeignKey('people_types.id', ondelete='SET NULL'))
 
     people_type = relationship('PeopleType')
 
@@ -168,7 +168,7 @@ class Product(Base):
     stock = Column(DECIMAL(10, 2))
     created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
     updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
-    department_id = Column(ForeignKey('departments.id', ondelete='CASCADE'))
+    department_id = Column(ForeignKey('departments.id', ondelete='SET NULL'))
 
     department = relationship('Department')
 
@@ -193,10 +193,10 @@ class MovProduct(Base):
     created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
     updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
     status = Column(Integer)
-    mov_type_id = Column(ForeignKey('mov_types.id', ondelete='CASCADE'))
-    product_id = Column(ForeignKey('products.id', ondelete='CASCADE'))
-    people_id = Column(ForeignKey('peoples.id', ondelete='CASCADE'))
-    user_id = Column(ForeignKey('users.id', ondelete='CASCADE'))
+    mov_type_id = Column(ForeignKey('mov_types.id', ondelete='SET NULL'))
+    product_id = Column(ForeignKey('products.id', ondelete='SET NULL'))
+    people_id = Column(ForeignKey('peoples.id', ondelete='SET NULL'))
+    user_id = Column(ForeignKey('users.id', ondelete='SET NULL'))
 
     mov_type = relationship('MovType')
     people = relationship('People')
@@ -225,7 +225,7 @@ class Purchase(Base):
     status = Column(Integer)
     created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
     updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
-    people_id = Column(ForeignKey('peoples.id', ondelete='CASCADE'))
+    people_id = Column(ForeignKey('peoples.id', ondelete='SET NULL'))
 
     people = relationship('People')
 
@@ -250,7 +250,7 @@ class Sale(Base):
     updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
     description = Column(String(1000))
     status = Column(Integer)
-    people_id = Column(ForeignKey('peoples.id', ondelete='CASCADE'))
+    people_id = Column(ForeignKey('peoples.id', ondelete='SET NULL'))
 
     people = relationship('People')
 
@@ -276,11 +276,13 @@ class AccountsPayable(Base):
     status = Column(Integer)
     created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
     updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
-    purchase_id = Column(ForeignKey('purchases.id', ondelete='CASCADE'))
-    account_id = Column(ForeignKey('accounts.id', ondelete='CASCADE'))
+    purchase_id = Column(ForeignKey('purchases.id', ondelete='SET NULL'))
+    account_id = Column(ForeignKey('accounts.id', ondelete='SET NULL'))
+    people_id = Column(ForeignKey('peoples.id', ondelete='SET NULL'))
 
     account = relationship('Account')
     purchase = relationship('Purchase')
+    people = relationship('People')
 
     def serialize(self):
         return {
@@ -306,11 +308,13 @@ class AccountsReceivable(Base):
     due_date = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
     updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
     amount = Column(DECIMAL(10, 2))
-    sale_id = Column(ForeignKey('sales.id', ondelete='CASCADE'))
-    account_id = Column(ForeignKey('accounts.id', ondelete='CASCADE'))
+    sale_id = Column(ForeignKey('sales.id', ondelete='SET NULL'))
+    account_id = Column(ForeignKey('accounts.id', ondelete='SET NULL'))
+    people_id = Column(ForeignKey('peoples.id', ondelete='SET NULL'))
 
     account = relationship('Account')
     sale = relationship('Sale')
+    people = relationship('People')
 
     def serialize(self):
         return {

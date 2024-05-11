@@ -10,7 +10,7 @@ products = Blueprint('products', __name__)
 @products.route('/products', methods=['GET'])
 @spec.validate(body=Request(ProductGet), resp=Response(HTTP_201=ProductGet))
 def get_products():
-    #GET All Products
+    #GET All Products by Filters
     try:
         query = db.session.query(Product)
 
