@@ -12,6 +12,7 @@ blue = "^0.9.1"
 flask-pydantic-spec = "^0.6.0"
 sqlacodegen = "^2.3.0.post1"
 taskipy = "^1.12.2"
+python-dotenv = "^1.0.1"
 
 
 [tool.poetry.group.dev.dependencies]
