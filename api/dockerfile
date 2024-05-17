@@ -1,0 +1,27 @@
+# Usar uma imagem base do Python 3.10
+FROM python:3.10
+
+# Instalar o Poetry
+RUN pip install poetry
+
+# Definir o diretório de trabalho dentro do container
+WORKDIR /usr/src/app
+
+# Copiar apenas os arquivos de configuração do Poetry primeiro
+COPY pyproject.toml poetry.lock ./
+
+# Instalar as dependências do projeto
+RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi
+
+# Copiar o restante do código do projeto para o diretório de trabalho
+COPY . .
+
+# Definir a variável de ambiente para a execução do Flask
+ENV FLASK_APP=main.py
+ENV FLASK_RUN_HOST=0.0.0.0
+
+# Expôr a porta 5000 para acesso externo
+EXPOSE 5000
+
+# Comando para iniciar a aplicação Flask
+CMD ["flask", "run"]
