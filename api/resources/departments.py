@@ -8,7 +8,6 @@ def create_departments_blueprint(spec):
     departments = Blueprint('departments', __name__)
 
     @departments.route('/departments', methods=['GET'])
-    @spec.validate(resp=Response(HTTP_200=DepartmentModel))
     def get_departments():
         db_session = g.db_session
         try:
@@ -20,7 +19,7 @@ def create_departments_blueprint(spec):
             return jsonify({'error': 'Database error'}), 500
 
     @departments.route('/department', methods=['POST'])
-    @spec.validate(body=Request(DepartmentModel), resp=Response(HTTP_201=DepartmentModel))
+    @spec.validate(body=Request(DepartmentModel))
     def post_department():
         db_session = g.db_session
         try:

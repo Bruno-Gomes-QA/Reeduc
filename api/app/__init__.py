@@ -1,13 +1,16 @@
 from flask import Flask, g
 from flask_pydantic_spec import FlaskPydanticSpec
 import os
+from dotenv import load_dotenv
 from database import Database
 from resources.products import create_products_blueprint
 from resources.departments import create_departments_blueprint
 
 def create_app():
 
-    user = os.environ['USER']
+    load_dotenv()
+
+    user = os.environ['USERMYSQL']
     password = os.environ['PASSWORD']
     host = os.environ['HOST']
     port = os.environ['PORT']
