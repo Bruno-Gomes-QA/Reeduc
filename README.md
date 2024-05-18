@@ -1,4 +1,4 @@
-# Reciclagem API
+# Reeduc
 
 ## Introdução
 Está é uma aplicação desenvolvida em Python usando Flask para criar uma API RESTful. Até o momento fornece endpoints para realizar operações relacionadas a produtos em um sistema de reciclagem.
