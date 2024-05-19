@@ -1,5 +1,14 @@
 # coding: utf-8
-from sqlalchemy import Column, DECIMAL, ForeignKey, Integer, String, TIMESTAMP, Table, text
+from sqlalchemy import (
+    Column,
+    DECIMAL,
+    ForeignKey,
+    Integer,
+    String,
+    TIMESTAMP,
+    Table,
+    text,
+)
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -15,8 +24,11 @@ class Account(Base):
     account_name = Column(String(255))
     account_description = Column(String(1000))
     balance = Column(DECIMAL(10, 2))
-    created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
-    updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    created_at = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at = Column(
+        TIMESTAMP,
+        server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+    )
 
     def serialize(self):
         return {
@@ -26,7 +38,7 @@ class Account(Base):
             'account_description': self.account_description,
             'balance': float(self.balance),
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
         }
 
 
@@ -36,8 +48,11 @@ class Department(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(255))
     description = Column(String(1000))
-    created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
-    updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    created_at = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at = Column(
+        TIMESTAMP,
+        server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+    )
 
     def serialize(self):
         return {
@@ -45,7 +60,7 @@ class Department(Base):
             'name': self.name,
             'description': self.description,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
         }
 
 
@@ -60,7 +75,7 @@ class MovType(Base):
         return {
             'id': self.id,
             'name': self.name,
-            'description': self.description
+            'description': self.description,
         }
 
 
@@ -69,15 +84,18 @@ class PeopleType(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(255))
-    created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
-    updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    created_at = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at = Column(
+        TIMESTAMP,
+        server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+    )
 
     def serialize(self):
         return {
             'id': self.id,
             'name': self.name,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
         }
 
 
@@ -89,8 +107,11 @@ class User(Base):
     email = Column(String(1000))
     tel = Column(String(255))
     password = Column(String(255))
-    created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
-    updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    created_at = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at = Column(
+        TIMESTAMP,
+        server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+    )
 
     def serialize(self):
         return {
@@ -99,7 +120,7 @@ class User(Base):
             'email': self.email,
             'tel': self.tel,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
         }
 
 
@@ -107,7 +128,7 @@ class AuditLog(Base):
     __tablename__ = 'audit_logs'
 
     id = Column(Integer, primary_key=True)
-    created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
+    created_at = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
     table_name = Column(String(255))
     operation_type = Column(String(255))
     old_value = Column(String(1000))
@@ -124,7 +145,7 @@ class AuditLog(Base):
             'operation_type': self.operation_type,
             'old_value': self.old_value,
             'new_value': self.new_value,
-            'user_id': self.user_id
+            'user_id': self.user_id,
         }
 
 
@@ -136,8 +157,11 @@ class People(Base):
     email = Column(String(1000))
     tel = Column(String(30))
     cpf = Column(String(16))
-    created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
-    updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    created_at = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at = Column(
+        TIMESTAMP,
+        server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+    )
     status = Column(Integer)
     people_type_id = Column(ForeignKey('people_types.id', ondelete='SET NULL'))
 
@@ -153,7 +177,7 @@ class People(Base):
             'status': self.status,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
-            'people_type_id': self.people_type_id
+            'people_type_id': self.people_type_id,
         }
 
 
@@ -166,8 +190,11 @@ class Product(Base):
     buy_price = Column(DECIMAL(10, 2))
     sale_price = Column(DECIMAL(10, 2))
     stock = Column(DECIMAL(10, 2))
-    created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
-    updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    created_at = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at = Column(
+        TIMESTAMP,
+        server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+    )
     department_id = Column(ForeignKey('departments.id', ondelete='SET NULL'))
 
     department = relationship('Department')
@@ -182,7 +209,7 @@ class Product(Base):
             'stock': float(self.stock),
             'created_at': self.created_at,
             'updated_at': self.updated_at,
-            'department_id': self.department_id
+            'department_id': self.department_id,
         }
 
 
@@ -190,8 +217,11 @@ class MovProduct(Base):
     __tablename__ = 'mov_products'
 
     id = Column(Integer, primary_key=True)
-    created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
-    updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    created_at = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at = Column(
+        TIMESTAMP,
+        server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+    )
     status = Column(Integer)
     mov_type_id = Column(ForeignKey('mov_types.id', ondelete='SET NULL'))
     product_id = Column(ForeignKey('products.id', ondelete='SET NULL'))
@@ -212,7 +242,7 @@ class MovProduct(Base):
             'mov_type_id': self.mov_type_id,
             'product_id': self.product_id,
             'people_id': self.people_id,
-            'user_id': self.user_id
+            'user_id': self.user_id,
         }
 
 
@@ -221,10 +251,13 @@ class Purchase(Base):
 
     id = Column(Integer, primary_key=True)
     description = Column(String(1000))
-    purchase_date = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
+    purchase_date = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
     status = Column(Integer)
-    created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
-    updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    created_at = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at = Column(
+        TIMESTAMP,
+        server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+    )
     people_id = Column(ForeignKey('peoples.id', ondelete='SET NULL'))
 
     people = relationship('People')
@@ -237,7 +270,7 @@ class Purchase(Base):
             'status': self.status,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
-            'people_id': self.people_id
+            'people_id': self.people_id,
         }
 
 
@@ -245,9 +278,12 @@ class Sale(Base):
     __tablename__ = 'sales'
 
     id = Column(Integer, primary_key=True)
-    sale_date = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
-    created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
-    updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    sale_date = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
+    created_at = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at = Column(
+        TIMESTAMP,
+        server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+    )
     description = Column(String(1000))
     status = Column(Integer)
     people_id = Column(ForeignKey('peoples.id', ondelete='SET NULL'))
@@ -262,7 +298,7 @@ class Sale(Base):
             'status': self.status,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
-            'people_id': self.people_id
+            'people_id': self.people_id,
         }
 
 
@@ -270,12 +306,15 @@ class AccountsPayable(Base):
     __tablename__ = 'accounts_payables'
 
     id = Column(Integer, primary_key=True)
-    due_date = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
+    due_date = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
     amount = Column(DECIMAL(10, 2))
     description = Column(String(1000))
     status = Column(Integer)
-    created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
-    updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    created_at = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at = Column(
+        TIMESTAMP,
+        server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+    )
     purchase_id = Column(ForeignKey('purchases.id', ondelete='SET NULL'))
     account_id = Column(ForeignKey('accounts.id', ondelete='SET NULL'))
     people_id = Column(ForeignKey('peoples.id', ondelete='SET NULL'))
@@ -294,7 +333,7 @@ class AccountsPayable(Base):
             'created_at': self.created_at,
             'updated_at': self.updated_at,
             'purchase_id': self.purchase_id,
-            'account_id': self.account_id
+            'account_id': self.account_id,
         }
 
 
@@ -303,10 +342,13 @@ class AccountsReceivable(Base):
 
     id = Column(Integer, primary_key=True)
     description = Column(String(1000))
-    created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
+    created_at = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
     status = Column(Integer)
-    due_date = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
-    updated_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    due_date = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at = Column(
+        TIMESTAMP,
+        server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+    )
     amount = Column(DECIMAL(10, 2))
     sale_id = Column(ForeignKey('sales.id', ondelete='SET NULL'))
     account_id = Column(ForeignKey('accounts.id', ondelete='SET NULL'))
@@ -326,19 +368,25 @@ class AccountsReceivable(Base):
             'updated_at': self.updated_at,
             'amount': float(self.amount),
             'sale_id': self.sale_id,
-            'account_id': self.account_id
+            'account_id': self.account_id,
         }
 
 
 t_product_mov_purchase = Table(
-    'product_mov_purchase', metadata,
-    Column('mov_product_id', ForeignKey('mov_products.id', ondelete='RESTRICT')),
-    Column('purchase_id', ForeignKey('purchases.id', ondelete='SET NULL'))
+    'product_mov_purchase',
+    metadata,
+    Column(
+        'mov_product_id', ForeignKey('mov_products.id', ondelete='RESTRICT')
+    ),
+    Column('purchase_id', ForeignKey('purchases.id', ondelete='SET NULL')),
 )
 
 
 t_product_mov_sale = Table(
-    'product_mov_sale', metadata,
-    Column('mov_product_id', ForeignKey('mov_products.id', ondelete='RESTRICT')),
-    Column('sale_id', ForeignKey('sales.id', ondelete='SET NULL'))
+    'product_mov_sale',
+    metadata,
+    Column(
+        'mov_product_id', ForeignKey('mov_products.id', ondelete='RESTRICT')
+    ),
+    Column('sale_id', ForeignKey('sales.id', ondelete='SET NULL')),
 )

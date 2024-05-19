@@ -6,6 +6,7 @@ from database import Database
 from resources.products import create_products_blueprint
 from resources.departments import create_departments_blueprint
 
+
 def create_app():
 
     load_dotenv()
@@ -17,17 +18,19 @@ def create_app():
     data = os.environ['DATABASE']
 
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{user}:{password}@{host}:{port}/{data}'
-    
+    app.config[
+        'SQLALCHEMY_DATABASE_URI'
+    ] = f'mysql+pymysql://{user}:{password}@{host}:{port}/{data}'
+
     db = Database(app.config['SQLALCHEMY_DATABASE_URI'])
-    
+
     spec = FlaskPydanticSpec('flask', title='API')
     spec.register(app)
-    
-    app.db = db 
+
+    app.db = db
     app.register_blueprint(create_products_blueprint(spec))
     app.register_blueprint(create_departments_blueprint(spec))
-    
+
     @app.before_request
     def before_request():
         g.db_session = app.db.get_session()
@@ -39,21 +42,24 @@ def create_app():
             db_session.close()
 
     return app
+
 
 def create_testing_app():
 
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:toor@localhost:3306/test'
-    
+    app.config[
+        'SQLALCHEMY_DATABASE_URI'
+    ] = 'mysql+pymysql://root:toor@localhost:3306/test'
+
     db = Database(app.config['SQLALCHEMY_DATABASE_URI'])
-    
+
     spec = FlaskPydanticSpec('flask', title='API')
     spec.register(app)
-    
-    app.db = db 
+
+    app.db = db
     app.register_blueprint(create_products_blueprint(spec))
     app.register_blueprint(create_departments_blueprint(spec))
-    
+
     @app.before_request
     def before_request():
         g.db_session = app.db.get_session()
@@ -65,4 +71,3 @@ def create_testing_app():
             db_session.close()
 
     return app
-

@@ -2,6 +2,7 @@ import sqlalchemy as sa
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models import Base
 
+
 class Database:
     def __init__(self, url):
         self.engine = sa.create_engine(url)
