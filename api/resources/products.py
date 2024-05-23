@@ -1,3 +1,5 @@
+# The products resource, with endpoints api for crud in mysql using sqlachemy to connect database(models) and pydantic(schemas)
+
 from flask import request, jsonify, Blueprint, g, current_app
 from flask_pydantic_spec import Response, Request
 from sqlalchemy.exc import SQLAlchemyError
