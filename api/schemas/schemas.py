@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, EmailStr
 from typing import Optional
 
 
@@ -16,6 +16,24 @@ class AccountModel(BaseModel):
     )
     updated_at: Optional[int] = Field(
         None, description='The last update time of the account'
+    )
+
+    class Config:
+        orm_mode = True
+
+
+class UserModel(BaseModel):
+    name: str = Field(..., description='Type name this User')
+    email = EmailStr = Field(..., description='The email this User')
+    tel = Optional[str] = Field(
+        None, description='The telephone number of the User'
+    )
+    password = str = Field(..., description='Encrypted password of the User')
+    created_at: Optional[int] = Field(
+        None, description='The creation time of the person'
+    )
+    updated_at: Optional[int] = Field(
+        None, description='The last update time of the person'
     )
 
     class Config:
