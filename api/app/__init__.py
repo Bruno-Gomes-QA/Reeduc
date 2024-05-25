@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from database import Database
 from resources.products import create_products_blueprint
 from resources.departments import create_departments_blueprint
+from resources.users import create_users_blueprint
 from resources.home import home
 
 
@@ -31,6 +32,7 @@ def create_app():
     app.db = db
     app.register_blueprint(create_products_blueprint(spec))
     app.register_blueprint(create_departments_blueprint(spec))
+    app.register_blueprint(create_users_blueprint(spec))
     app.register_blueprint(home)
 
     @app.before_request
