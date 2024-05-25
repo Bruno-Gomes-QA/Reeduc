@@ -1,4 +1,4 @@
-#Similar route products.py, but with peoples endpoint
+# Similar route products.py, but with peoples endpoint
 from flask import Blueprint, jsonify, request, current_app, g
 from flask_pydantic_spec import Response, Request
 from sqlalchemy.exc import SQLAlchemyError
@@ -6,6 +6,7 @@ from models import People
 from schemas import PeopleModel, PeopleGet
 
 peoples = Blueprint('peoples', __name__)
+
 
 def create_peoples_blueprint(spec):
     @peoples.route('/peoples', methods=['GET'])
