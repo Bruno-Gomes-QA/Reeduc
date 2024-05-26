@@ -48,5 +48,47 @@ def create_departments_blueprint(spec):
                 jsonify({'message': 'Invalid Input Data', 'error': str(e)}),
                 400,
             )
-
+    @departments.route('/department/<int:id>', methods=['PUT'])
+    @spec.validate(body=Request(DepartmentModel))
+    def put_department(id):
+        db_session = g.db_session
+        try:
+            data = request.context.body.dict()
+            department = db_session.query(Department).filter_by(id=id).first()
+            if not department:
+                return jsonify({'error': 'Department not found'}), 404
+            department.department_name = data.get(
+                'department_name', department.department_name
+            )
+            db_session.commit()
+            return (
+                jsonify(
+                    {
+                        'message': 'Department updated',
+                        'data': department.serialize(),
+                    }
+                ),
+                200,
+            )
+        except SQLAlchemyError as e:
+            current_app.logger.error(f'Failed to update department: {e}')
+            return jsonify({'error': 'Database error'}), 500
+        
+    @departments.route('/department/<int:id>', methods=['DELETE'])
+    def delete_department(id):
+        db_session = g.db_session
+        try:
+            department = db_session.query(Department).filter_by(id=id).first()
+            if not department:
+                return jsonify({'error': 'Department not found'}), 404
+            db_session.delete(department)
+            db_session.commit()
+            return (
+                jsonify({'message': 'Department deleted successfully'}),
+                200,
+            )
+        except SQLAlchemyError as e:
+            current_app.logger.error(f'Failed to delete department: {e}')
+            return jsonify({'error': 'Database error'}), 500
+    
     return departments
