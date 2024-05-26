@@ -28,7 +28,7 @@ def create_app():
 
     db = Database(app.config['SQLALCHEMY_DATABASE_URI'])
 
-    spec = FlaskPydanticSpec('flask', title='API')
+    spec = FlaskPydanticSpec('flask', title='Reeduc API')
     spec.register(app)
     app.db = db
     app.register_blueprint(create_products_blueprint(spec))

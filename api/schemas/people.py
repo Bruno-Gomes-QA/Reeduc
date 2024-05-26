@@ -27,6 +27,7 @@ class PeopleModel(BaseModel):
 
 
 class PeopleGet(BaseModel):
+    people_id: Optional[int] = Field(None, description='The ID of the person')
     name: Optional[str] = Field(None, description='The name of the person')
     email: Optional[str] = Field(None, description='The email of the person')
     tel: Optional[str] = Field(
@@ -53,6 +54,17 @@ class PeopleTypeModel(BaseModel):
     )
     updated_at: Optional[int] = Field(
         None, description='The last update time of the person type'
+    )
+
+    class Config:
+        orm_mode = True
+
+
+class PeopleTypeGet(BaseModel):
+    id: Optional[int] = Field(None, description='The ID of the person type')
+    name: Optional[str] = Field(None, description='The type of person')
+    description: Optional[str] = Field(
+        None, description='The description of the person type'
     )
 
     class Config:

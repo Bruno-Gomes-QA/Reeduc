@@ -95,6 +95,7 @@ class PeopleType(Base):
         return {
             'id': self.id,
             'name': self.name,
+            'description': self.description,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
