@@ -6,6 +6,8 @@ from database import Database
 from resources.products import create_products_blueprint
 from resources.departments import create_departments_blueprint
 from resources.users import create_users_blueprint
+from resources.peoples import create_peoples_blueprint
+from resources.peopletypes import create_people_types_blueprint
 from resources.home import home
 
 
@@ -26,13 +28,14 @@ def create_app():
 
     db = Database(app.config['SQLALCHEMY_DATABASE_URI'])
 
-    spec = FlaskPydanticSpec('flask', title='API')
+    spec = FlaskPydanticSpec('flask', title='Reeduc API')
     spec.register(app)
-
     app.db = db
     app.register_blueprint(create_products_blueprint(spec))
     app.register_blueprint(create_departments_blueprint(spec))
     app.register_blueprint(create_users_blueprint(spec))
+    app.register_blueprint(create_peoples_blueprint(spec))
+    app.register_blueprint(create_people_types_blueprint(spec))
     app.register_blueprint(home)
 
     @app.before_request

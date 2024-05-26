@@ -84,6 +84,7 @@ class PeopleType(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(255))
+    description = Column(String(1000))
     created_at = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
     updated_at = Column(
         TIMESTAMP,
@@ -94,6 +95,7 @@ class PeopleType(Base):
         return {
             'id': self.id,
             'name': self.name,
+            'description': self.description,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }

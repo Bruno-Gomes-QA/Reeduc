@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import Optional
 
+
 class UserModel(BaseModel):
     name: str = Field(..., description='Type name this User')
     email: str = Field(..., description='The email this User')
@@ -18,13 +19,10 @@ class UserModel(BaseModel):
     class Config:
         orm_mode = True
 
+
 class UserGet(BaseModel):
-    name: Optional[str] = Field(
-        None, description='The name of the User'
-    )
-    email: Optional[str] = Field(
-        None, description='The email of the User'
-    )
+    name: Optional[str] = Field(None, description='The name of the User')
+    email: Optional[str] = Field(None, description='The email of the User')
     tel: Optional[str] = Field(
         None, description='The telephone number of the User'
     )
