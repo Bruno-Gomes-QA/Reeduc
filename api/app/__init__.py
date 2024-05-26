@@ -30,7 +30,6 @@ def create_app():
 
     spec = FlaskPydanticSpec('flask', title='API')
     spec.register(app)
-
     app.db = db
     app.register_blueprint(create_products_blueprint(spec))
     app.register_blueprint(create_departments_blueprint(spec))
