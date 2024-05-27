@@ -40,6 +40,11 @@ jobs:
 
     - name: Run tests
       env:
-        DATABASE_URL: mysql+pymysql://user:toor@localhost:3306/base
+        USERMYSQL: root
+        PASSWORD: toor
+        HOST: localhost
+        PORT: 3306
+        DATABASE: base
+        DEBUG: True
       run: |
-        poetry run pytest
+        pytest
