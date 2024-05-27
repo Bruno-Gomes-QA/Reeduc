@@ -10,7 +10,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Run Docker Compose
+    - name: Set Environment Variables
       run: |
         cd ./api
       env:
@@ -20,6 +20,8 @@ jobs:
         PORT: 3306
         DATABASE: base
         DEBUG: True
+        
+    - name: Build Docker Image
       run: |
         docker-compose up -d
 
