@@ -10,21 +10,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set Environment Variables
-      run: |
-        cd ./api
-      env:
-        USERMYSQL: root
-        PASSWORD: toor
-        HOST: localhost
-        PORT: 3306
-        DATABASE: base
-        DEBUG: True
-
     - name: Build Docker Image
       run: |
         cd ./api && docker-compose up -d
 
     - name: Run tests
       run: |
-        docker exec -it api pytest
+        docker exec -it app pytest

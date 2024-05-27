@@ -3,8 +3,13 @@ services:
     build: .
     ports:
       - "5000:5000"
-    env_file:
-      - .env
+    environment:
+      USERMYSQL: root
+      PASSWORD: toor
+      HOST: localhost
+      PORT: 3306
+      DATABASE: base
+      DEBUG: True
     depends_on:
       db:
         condition: service_healthy
