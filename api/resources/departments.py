@@ -48,6 +48,7 @@ def create_departments_blueprint(spec):
                 jsonify({'message': 'Invalid Input Data', 'error': str(e)}),
                 400,
             )
+
     @departments.route('/department/<int:id>', methods=['PUT'])
     @spec.validate(body=Request(DepartmentModel))
     def put_department(id):
@@ -73,7 +74,7 @@ def create_departments_blueprint(spec):
         except SQLAlchemyError as e:
             current_app.logger.error(f'Failed to update department: {e}')
             return jsonify({'error': 'Database error'}), 500
-        
+
     @departments.route('/department/<int:id>', methods=['DELETE'])
     def delete_department(id):
         db_session = g.db_session
@@ -90,5 +91,5 @@ def create_departments_blueprint(spec):
         except SQLAlchemyError as e:
             current_app.logger.error(f'Failed to delete department: {e}')
             return jsonify({'error': 'Database error'}), 500
-    
+
     return departments

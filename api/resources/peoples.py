@@ -2,7 +2,7 @@
 from flask import Blueprint, jsonify, request, current_app, g
 from flask_pydantic_spec import Response, Request
 from sqlalchemy.exc import SQLAlchemyError
-from models import People
+from models import People, PeopleType
 from schemas import PeopleModel, PeopleGet
 
 peoples = Blueprint('peoples', __name__)
@@ -61,6 +61,16 @@ def create_peoples_blueprint(spec):
         db_session = g.db_session
         try:
             data = request.json
+            people_type = (
+                db_session.query(PeopleType)
+                .filter_by(id=data['people_type_id'])
+                .first()
+            )
+            if not people_type:
+                return (
+                    jsonify({'message': 'Invalid People Type'}),
+                    400,
+                )
             people = People(**data)
             db_session.add(people)
             db_session.commit()
