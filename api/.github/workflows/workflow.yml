@@ -42,4 +42,4 @@ jobs:
       env:
         DATABASE_URL: mysql+pymysql://user:toor@localhost:3306/base
       run: |
-        poetry run pytest
+        pytest
