@@ -41,10 +41,10 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install poetry
+        cd ./api
         poetry config virtualenvs.create false
         poetry install --no-interaction --no-ansi
         
     - name: Running Tests
       run: |
-        cd ./api
         pytest
