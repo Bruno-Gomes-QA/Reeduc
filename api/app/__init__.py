@@ -15,12 +15,6 @@ def create_app(testing=False):
 
     load_dotenv()
 
-    user = os.environ['USERMYSQL']
-    password = os.environ['PASSWORD']
-    host = os.environ['HOST']
-    port = os.environ['PORT']
-    data = os.environ['DATABASE']
-
     app = Flask(__name__)
     if testing:
         print('Testing')
@@ -28,6 +22,11 @@ def create_app(testing=False):
             'SQLALCHEMY_DATABASE_URI'
         ] = 'mysql+pymysql://user:toor@localhost:3306/base'
     else:
+        user = os.environ['USERMYSQL']
+        password = os.environ['PASSWORD']
+        host = os.environ['HOST']
+        port = os.environ['PORT']
+        data = os.environ['DATABASE']
         app.config[
             'SQLALCHEMY_DATABASE_URI'
         ] = f'mysql+pymysql://{user}:{password}@{host}:{port}/{data}'
