@@ -11,7 +11,7 @@ from resources.peopletypes import create_people_types_blueprint
 from resources.home import home
 
 
-def create_app():
+def create_app(testing=False):
 
     load_dotenv()
 
@@ -22,9 +22,15 @@ def create_app():
     data = os.environ['DATABASE']
 
     app = Flask(__name__)
-    app.config[
-        'SQLALCHEMY_DATABASE_URI'
-    ] = f'mysql+pymysql://{user}:{password}@{host}:{port}/{data}'
+    if testing:
+        print('Testing')
+        app.config[
+            'SQLALCHEMY_DATABASE_URI'
+        ] = 'mysql+pymysql://root:toor@localhost:3306/base'
+    else:
+        app.config[
+            'SQLALCHEMY_DATABASE_URI'
+        ] = f'mysql+pymysql://{user}:{password}@{host}:{port}/{data}'
 
     db = Database(app.config['SQLALCHEMY_DATABASE_URI'])
 

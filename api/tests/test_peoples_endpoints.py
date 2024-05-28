@@ -1,8 +1,8 @@
-from main import app
+from app import create_app
 from pytest import fixture, mark
 from models import Base
 
-
+app = create_app(testing=True)
 @fixture(scope='session')
 def client():
     with app.test_client() as client:
