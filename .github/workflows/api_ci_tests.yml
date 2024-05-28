@@ -21,7 +21,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: toor
           MYSQL_DATABASE: base
-          MYSQL_USER: root
+          MYSQL_USER: user
           MYSQL_PASSWORD: toor
         options: >-
           --health-cmd="mysqladmin ping --silent"

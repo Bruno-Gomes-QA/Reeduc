@@ -26,7 +26,7 @@ def create_app(testing=False):
         print('Testing')
         app.config[
             'SQLALCHEMY_DATABASE_URI'
-        ] = 'mysql+pymysql://root:toor@localhost:3306/base'
+        ] = 'mysql+pymysql://user:toor@localhost:3306/base'
     else:
         app.config[
             'SQLALCHEMY_DATABASE_URI'
