@@ -45,6 +45,8 @@ jobs:
         poetry install --no-interaction --no-ansi
         
     - name: Running Tests
+      env:
+        SQLALCHEMY_WARN_20: "1"
       run: |
         cd ./api
         poetry run pytest
