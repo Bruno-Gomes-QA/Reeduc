@@ -6,7 +6,7 @@ authors = ["Bruno Gomes QA <bruno.gomes.qa@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.10"
+python = ">=3.10,<3.11"
 flask = "3.0.3"
 blue = "^0.9.1"
 flask-pydantic-spec = "^0.6.0"
