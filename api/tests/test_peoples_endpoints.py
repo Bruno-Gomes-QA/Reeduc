@@ -9,7 +9,7 @@ def client():
         yield client
         Base.metadata.drop_all(app.db.engine)
 
-
+# GWT - Given, When, Then
 def test_given_not_peoples_when_get_all_peoples_then_empty_data(client):
     response = client.get('/peoples')
     assert response.status_code == 200
