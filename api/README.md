@@ -7,7 +7,7 @@
 </p>
 <div>
   <h2 id="Introdução">Introdução a API ☕</h2>
-  <p>A API tem como objetivo concentrar todas as regras de negócio, as autenticações dos usuários, criptografia de senhas e dados sensíveis e de se comunicar com o banco de dados. Contruida utilizando python, flask e poetry, visa trabalhar da forma mais simples para solução dos problemas.</p>
+  <p>A API tem como objetivo concentrar todas as regras de negócio, as autenticações dos usuários, criptografia de senhas e dados sensíveis e de se comunicar com o banco de dados. Construida utilizando python, flask e poetry, visa trabalhar da forma mais simples para solução dos problemas.</p>
 
   ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
   ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
@@ -20,7 +20,7 @@
   </p>
   <div>
     <h3>./app</h3>
-    <p>- Contem a lógica de inicialização da aplicação. Responsável pela contrução do swagger de por adiministrar as coneções com o banco de dados.</p>
+    <p>- Contem a lógica de inicialização da aplicação. Responsável pela contrução do swagger de por adiministrar as conexões com o banco de dados.</p>
     <h3>./database</h3>
     <p>- Responsável pelas configurações e conexões com o banco de dados. Utilizando SQLAlchemy para criar e gerenciar as sessões.</p>
     <h3>./resources</h3>
