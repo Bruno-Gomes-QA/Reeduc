@@ -12,7 +12,7 @@ def client():
 # GWT - Given, When, Then
 def test_given_not_peoples_hen_get_all_peoples_then_empty_data(client):
     response = client.get('/peoples')
-    assert response.status_code == 200
+    assert response.status_code == 201
     assert response.json == {'message': 'Filtered Peoples', 'data': []}
 
 
