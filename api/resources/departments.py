@@ -58,8 +58,11 @@ def create_departments_blueprint(spec):
             department = db_session.query(Department).filter_by(id=id).first()
             if not department:
                 return jsonify({'error': 'Department not found'}), 404
-            department.department_name = data.get(
-                'department_name', department.department_name
+            department.name = data.get(
+                'name', department.name
+            )
+            department.description = data.get(
+                'description', department.description
             )
             db_session.commit()
             return (

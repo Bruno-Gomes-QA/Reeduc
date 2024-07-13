@@ -1,0 +1,13 @@
+[client]
+showSidebarNavigation = false
+
+[browser]
+gatherUsageStats = false
+
+[server]
+headless = true
+
+[theme]
+base="dark"
+primaryColor="#00ffc4"
+font="monospace"
