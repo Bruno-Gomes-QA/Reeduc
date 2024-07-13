@@ -33,7 +33,7 @@ with col3:
     container3.write('Top Fornecedores')
     container3.bar_chart(chart_data)
     if st.button('Fornecedores'):
-        st.switch_page('pages/fornecedores.py')
+        st.switch_page('pages/peoples.py')
 with col4:
     container4 = col4.container(border=True)
     container4.write('Compra Semanal')
